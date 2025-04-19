@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh '''
                     if grep -q "Base64" Encryptor.java; then
-                        echo "Insecure encryption method detected!"
+                        echo "Error: The encryption method used (Base64) is insecure and vulnerable to attacks. Please use a stronger encryption algorithm."
                         exit 1
                     fi
                 '''
