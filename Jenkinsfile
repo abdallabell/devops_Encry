@@ -11,16 +11,15 @@ pipeline {
                 sh 'javac Encryptor.java'
             }
         }
+     stages {
         stage('OWASP Dependency-Check') {
             steps {
-                script {
-                    dependencyCheck additionalArguments: '--scan ./ --format ALL', odcInstallation: 'dependency-check'
-                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-                }
+                dependencyCheck additionalArguments: '--scan . --format HTML --format XML', odcInstallation: 'dependency-check'
             }
         }
+    }
 
-        stage('Security Check') {
+        stage('Security Check') 
             steps {
                 sh '''
                     if grep -q "Base64" Encryptor.java; then
