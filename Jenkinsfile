@@ -11,39 +11,6 @@ pipeline {
                 sh 'javac Encryptor.java'
             }
         }
-   
-   
-        stage('Download Dependency-Check') {
-            steps {
-                sh '''
-                    wget -q https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip
-                    unzip -o dependency-check-8.4.0-release.zip -d dependency-check
-                '''
-            }
-        }
-
-        stage('Run Security Scan') {
-            steps {
-                sh '''
-                    dependency-check/bin/dependency-check.sh \\
-                        --project "MyProject" \\
-                        --scan . \\
-                        --format "HTML" \\
-                        --out .
-                '''
-            }
-        }
-
-        stage('Publish Report') {
-            steps {
-                publishHTML(target: [
-                    reportDir: '.', 
-                    reportFiles: 'dependency-check-report.html', 
-                    reportName: 'OWASP Dependency-Check Report'
-                ])
-            }
-        }
-
 
 
         stage('Security Check') {
