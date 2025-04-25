@@ -19,7 +19,7 @@ pipeline {
         }
     }
 
-        stage('Security Check') 
+        stage('Security Check') {
             steps {
                 sh '''
                     if grep -q "Base64" Encryptor.java; then
@@ -28,6 +28,7 @@ pipeline {
                     fi
                 '''
             }
+        }
         
 
         stage('Build Docker Image') {
@@ -42,5 +43,5 @@ pipeline {
             }
         }
     }
-    }
+}
 
