@@ -28,7 +28,7 @@ pipeline {
                     fi
                 '''
             }
-        }
+        
 
         stage('Build Docker Image') {
             steps {
@@ -41,5 +41,6 @@ pipeline {
                 sh 'docker run --rm insecure_encryptor_app'
             }
         }
+    }
     }
 
