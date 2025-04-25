@@ -11,13 +11,7 @@ pipeline {
                 sh 'javac Encryptor.java'
             }
         }
-     stages {
-        stage('OWASP Dependency-Check') {
-            steps {
-                dependencyCheck additionalArguments: '--scan . --format HTML --format XML', odcInstallation: 'dependency-check'
-            }
-        }
-    }
+    
 
         stage('Security Check') {
             steps {
